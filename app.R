@@ -10,12 +10,27 @@ bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
 ui <- fluidPage(
   titlePanel("BC Liquor Store prices"),
   sidebarLayout(
+    #our inputs go here
     sidebarPanel(sliderInput("priceInput", "Price", min = 0, max = 100,
-                             value = c(25, 40), pre = "$")
+                             value = c(25, 40), pre = "$"),
+                 radioButtons("typeInput", "Product type",
+                              choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
+                              selected = "WINE"),
+                 selectInput("countryInput", "Country",
+                             choices = c("CANADA", "FRANCE", "ITALY"))
                  ),
-    mainPanel("the results will go here")
+    #our results will go here
+    #placeholder in UI for plot named coolplot
+    mainPanel(plotOutput("coolplot"),
+              br(),
+              br(),
+              br(),
+              tableOutput("results")
+              )
   )
 )
+
+#prints in console
 server <- function(input, output, session) {
   print(str(bcl))
 }

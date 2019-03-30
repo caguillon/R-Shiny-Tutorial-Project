@@ -36,8 +36,10 @@ server <- function(input, output, session) {
   
   #creating a plot inside renderPlot() & assigning it to coolplot in output list
   output$coolplot <- renderPlot({
-    plot(rnorm(100))
-    })
+    #uses min input to display that number of points
+    plot(rnorm(input$priceInput[1]))
+  })
+  
 }
 
 shinyApp(ui = ui, server = server)

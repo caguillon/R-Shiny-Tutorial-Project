@@ -30,9 +30,14 @@ ui <- fluidPage(
   )
 )
 
-#prints in console
 server <- function(input, output, session) {
+  #prints in console
   print(str(bcl))
+  
+  #creating a plot inside renderPlot() & assigning it to coolplot in output list
+  output$coolplot <- renderPlot({
+    plot(rnorm(100))
+    })
 }
 
 shinyApp(ui = ui, server = server)

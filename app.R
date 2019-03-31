@@ -36,7 +36,7 @@ server <- function(input, output, session) {
   
   #creating a plot inside renderPlot() & assigning it to coolplot in output list
   output$coolplot <- renderPlot({
-    #uses min input to display that number of points
+    #uses min price range input to display that number of points
     plot(rnorm(input$priceInput[1]))
   })
   

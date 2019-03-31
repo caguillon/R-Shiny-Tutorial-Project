@@ -61,6 +61,8 @@ server <- function(input, output, session) {
     filtered
   })
   
+  #all inputs are reactive, so they must be wrapped in a render function
+  observe({print(input$priceInput)})
 }
 
 shinyApp(ui = ui, server = server)

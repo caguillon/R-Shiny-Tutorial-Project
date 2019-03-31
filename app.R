@@ -36,29 +36,25 @@ server <- function(input, output, session) {
   #prints in console
   print(str(bcl))
   
-  #creating a plot inside renderPlot() & assigning it to coolplot in output list
-  output$coolplot <- renderPlot({
-    filtered <-
-      bcl %>%
+  #reactive variable (to reduce code duplication)
+  filtered <- reactive({
+    bcl %>%
       filter(Price >= input$priceInput[1],
                    Price <= input$priceInput[2],
                    Type == input$typeInput,
                    Country == input$countryInput
             )
-    ggplot(filtered, aes(Alcohol_Content)) +
+  })
+  
+  #creating a plot inside renderPlot() & assigning it to coolplot in output list
+  output$coolplot <- renderPlot({
+    ggplot(filtered(), aes(Alcohol_Content)) +
     geom_histogram()
   })
   
   #creating a table inside renderTable()
   output$results <- renderTable({
-    filtered <-
-      bcl %>%
-      filter(Price >= input$priceInput[1],
-                   Price <= input$priceInput[2],
-                   Type == input$typeInput,
-                   Country == input$countryInput
-            )
-    filtered
+    filtered()
   })
   
   #all inputs are reactive, so they must be wrapped in a render function

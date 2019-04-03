@@ -18,8 +18,10 @@ ui <- fluidPage(
                  radioButtons("typeInput", "Product type",
                               choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
                               selected = "WINE"),
-                 selectInput("countryInput", "Country",
-                             choices = c("CANADA", "FRANCE", "ITALY"))
+                 #selectInput("countryInput", "Country",
+                             #choices = c("CANADA", "FRANCE", "ITALY"))
+                 #to create UI elements dynamically (ex. v will replace manual input of select input)
+                 uiOutput("countryOutput")
                  ),
     #our results will go here
     #placeholder in UI for plot named coolplot
@@ -35,6 +37,13 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   #prints in console
   print(str(bcl))
+  
+  #will create a UI element
+  output$countryOutput <- renderUI({
+    selectInput("countryInput", "Country",
+                    sort(unique(bcl$Country)),
+                    selected = "CANADA")
+  })
   
   #reactive variable (to reduce code duplication)
   filtered <- reactive({

@@ -1,3 +1,8 @@
+#App is complete. Final steps would be to put it on the internet.
+#Options:
+  #Host on shinyapps.io (free)
+  #Host on a Shiny Server
+
 #required libraries
 library(shiny)
 library(ggplot2)

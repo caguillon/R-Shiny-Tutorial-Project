@@ -47,6 +47,12 @@ server <- function(input, output, session) {
   
   #reactive variable (to reduce code duplication)
   filtered <- reactive({
+    #since country input is dynamically and takes some time to create,
+    #filtered will be created when it is not null. This will take care of errors when app runs.
+    if (is.null(input$countryInput)) {
+      return(NULL)
+    }
+    #actual value we want for filtered
     bcl %>%
       filter(Price >= input$priceInput[1],
                    Price <= input$priceInput[2],
@@ -57,6 +63,10 @@ server <- function(input, output, session) {
   
   #creating a plot inside renderPlot() & assigning it to coolplot in output list
   output$coolplot <- renderPlot({
+    #while app is setting up, null is default to avoid errors
+    if (is.null(filtered())) {
+      return()
+    }
     ggplot(filtered(), aes(Alcohol_Content)) +
     geom_histogram()
   })

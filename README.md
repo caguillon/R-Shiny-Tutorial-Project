@@ -13,3 +13,9 @@ The following functionality is completed:
   * [x] Price, type, and country inputs.
 * [x] Learned how to work with outputs.
 * [x] Implemented a reactive variable.
+* [x] Implemented a uiOutput() to create UI elements dynamically.
+ * [x] For country input.
+ * [x] Fixed errors, when app loads, that come when implementing uiOutput().
+ 
+The following functionality is optional:
+* [ ] Putting the app on the internet.
